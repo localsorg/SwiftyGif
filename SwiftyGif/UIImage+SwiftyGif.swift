@@ -224,7 +224,6 @@ public extension UIImage {
             let maximumFramesPerSecond = UIScreen.main.maximumFramesPerSecond
             if maximumFramesPerSecond == 120 {
                 displayRefreshRates.append(maximumFramesPerSecond)
-                displayRefreshFactors.insert(maximumFramesPerSecond, at: 0)
             }
         }
 
@@ -238,6 +237,8 @@ public extension UIImage {
         
         //find the appropriate Factors then BREAK
         for (i, delayTime) in displayRefreshDelayTime.enumerated() {
+            guard displayRefreshFactors.indices.contains(i) else { return }
+            
             let displayPosition = delays.map { Int($0 / delayTime) }
            
             var frameLoseCount: Float = 0
